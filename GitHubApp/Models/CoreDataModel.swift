@@ -10,20 +10,49 @@ import UIKit
 import CoreData
 
 class CoreDataModel {
-    static func deleteRecords(of entityName: String) -> Void {
+    
+    static func deleteRecords() {
         let context = getContext()
-        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: entityName)
+        let fetch = NSFetchRequest<NSFetchRequestResult>(entityName: "User")
+        let request = NSBatchDeleteRequest(fetchRequest: fetch)
         
-        let result = try? context.fetch(fetchRequest)
-        let resultData = result as! [NSManagedObject]
-        
-        for object in resultData { context.delete(object) }
-        
-        do { try context.save() }
-        catch { print("Error while saving") }
+        do { try context.execute(request) }
+        catch { print("Failed deleting info") }
     }
     
-    static func getContext () -> NSManagedObjectContext {
+    static func addRecord( _ value: String) {
+        let context = getContext()
+        let entity = NSEntityDescription.entity(forEntityName: "User", in: context)
+        let newUser = NSManagedObject(entity: entity!, insertInto: context)
+        
+        newUser.setValue(value, forKey: "token")
+        
+        do { try context.save() }
+        catch { print("Failed saving info") }
+    }
+    
+    static func getRecord(completion: (String?)->()) {
+        let context = getContext()
+        let request = NSFetchRequest<NSFetchRequestResult>(entityName: "User")
+        request.returnsObjectsAsFaults = false
+        var result: String?
+        do {
+            guard let entityObject = try context.fetch(request) as? [NSManagedObject] else {
+                completion(nil)
+                return
+            }
+            entityObject.forEach {
+                print("\n", $0.value(forKey: "token") as! String, "\n")
+            }
+            if !entityObject.isEmpty { result = entityObject[0].value(forKey: "token") as? String }
+            completion(result)
+        } catch {
+            print("Failed getting info")
+            completion(nil)
+        }
+    }
+    
+    static func getContext() -> NSManagedObjectContext {
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         return appDelegate.persistentContainer.viewContext
     }

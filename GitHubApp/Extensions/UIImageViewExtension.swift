@@ -16,4 +16,11 @@ extension UIImageView {
         layer.cornerRadius = self.frame.width / borderWidth
         clipsToBounds = true
     }
+    
+    func setImageFrom(stringURL: String) {
+        guard let imageURL = URL(string: stringURL) else { return }
+        if let imageData: Data = try? Data(contentsOf: imageURL, options: .mappedRead) {
+            self.image = UIImage(data: imageData as Data)
+        }
+    }
 }

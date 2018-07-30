@@ -10,16 +10,13 @@ import UIKit
 
 class ProfileTableViewController: UITableViewController {
     
-    var profileInfo: UserInfo!
+    var userInfo: UserInfo!
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.tableView.tableFooterView = UIView(frame: CGRect.zero)
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-    }
-
     override func numberOfSections(in tableView: UITableView) -> Int {
         return 2
     }
@@ -28,7 +25,7 @@ class ProfileTableViewController: UITableViewController {
         guard let section = ProfileSectionType(rawValue: section) else { return 0 }
         switch section {
         case .profileInfo:
-            let numberOfSections = (profileInfo != nil) ? 1 : 0
+            let numberOfSections = (userInfo != nil) ? 1 : 0
             return numberOfSections
         case .usersActions:
             return 0
@@ -37,7 +34,7 @@ class ProfileTableViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "ProfileTableViewCell", for: indexPath) as? ProfileTableViewCell else { return UITableViewCell() }
-        cell.configure(with: profileInfo)
+        cell.configure(with: userInfo)
         // Configure the cell...
 
         return cell

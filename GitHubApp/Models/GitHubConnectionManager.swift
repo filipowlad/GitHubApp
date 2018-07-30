@@ -58,6 +58,7 @@ class GitHubConnectionManager {
                         }
                         do {
                             let token = try JSONDecoder().decode(OAuth2Token.self, from: dataResponse)
+                            CoreDataModel.addRecord(token.accessToken)
                             completion(token)
                         } catch let parsingError { print("Error", parsingError) }
                     }
@@ -66,92 +67,40 @@ class GitHubConnectionManager {
         }
     }
     
-    static func getUserInfo(with accessToken: String, completion: @escaping (UserInfo) -> Void) {
+    static func getUserInfo(with accessToken: String, completion: @escaping (UserInfo?) -> Void) {
         guard let url = URL(string: "https://api.github.com/user") else { return }
         let headers = ["Authorization": "token \(accessToken)", "Accept": "application/json"]
         request(url, method: .get, parameters: nil, encoding: URLEncoding.default, headers: headers).validate().responseJSON { response in
             switch response.result {
             case .success:
                 guard let jsonData = response.data else { return }
-                do {
-                    print(response)
-                    let jsonResponse = try JSONDecoder().decode(UserInfo.self, from: jsonData)
-                    completion(jsonResponse)
-                }
-                catch { print("error catched") }
+                let jsonResponse = try? JSONDecoder().decode(UserInfo.self, from: jsonData)
+                completion(jsonResponse)
             case .failure:
-                print("failure")
+                completion(nil)
             }
         }
     }
     
-//    static func loadToken() {
-//        if clientID != "" {
-//            let keychain = KeychainPasswordItem(service: "OAuth2Client.\(clientID)", account: )
-//            do {
-//                if let accessToken = try keychain.get("accessToken.accessToken"), let type = try keychain.get("accessToken.tokenType"), let refreshToken = try keychain.get("accessToken.refreshToken") {
-//                    self.token = OAuth2Token()
-//                    self.token?.accessToken = accessToken
-//                    self.token?.tokenType = type
-//                    self.token?.refreshToken = refreshToken
-//                    if let idToken = try keychain.get("accessToken.idToken") {
-//                        self.token?.idToken = idToken
-//                    }
-//                    if let timeIntervalString = try keychain.get("accessToken.accessTokenExpiry") {
-//                        if let timeInterval = Double(timeIntervalString) {
-//                            let accessTokenExpiry = Date(timeIntervalSinceReferenceDate: timeInterval)
-//                            self.token?.accessTokenExpiry = accessTokenExpiry
-//                        }
-//                    }
-//                }
-//            } catch let error {
-//                print("loadToken error: \(error)")
-//            }
-//        } else {
-//            print("error: No client Id provided")
-//        }
-//    }
-//
-//    /// Override to implement your own logic in subclass.
-//    open func saveToken() {
-//        if self.configuration.clientId != "" {
-//            let keychain = Keychain(service: "OAuth2Client.\(self.configuration.clientId)")
-//            if let accessToken = self.token?.accessToken, let type = self.token?.tokenType, let refreshToken = self.token?.refreshToken {
-//                do {
-//                    try keychain.synchronizable(true).set("\(accessToken)", key: "accessToken.accessToken")
-//                    try keychain.synchronizable(true).set("\(type)", key: "accessToken.tokenType")
-//                    try keychain.synchronizable(true).set("\(refreshToken)", key: "accessToken.refreshToken")
-//                    if let idToken = self.token?.idToken {
-//                        try keychain.synchronizable(true).set("\(idToken)", key: "accessToken.idToken")
-//                    }
-//                    if let accessTokenExpiry = self.token?.accessTokenExpiry {
-//                        let timeInterval = accessTokenExpiry.timeIntervalSinceReferenceDate
-//                        try keychain.synchronizable(true).set("\(timeInterval)", key: "accessToken.accessTokenExpiry")
-//                    }
-//                } catch let error {
-//                    print("saveToken error: \(error)")
-//                }
-//            }
-//        } else {
-//            print("error: No client Id provided")
-//        }
-//    }
-//    
-//    /// Override to implement your own logic in subclass.
-//    open func clearToken() {
-//        if self.configuration.clientId != "" {
-//            let keychain = Keychain(service: "OAuth2Client.\(self.configuration.clientId)")
-//            do {
-//                try keychain.remove("accessToken.accessToken")
-//                try keychain.remove("accessToken.tokenType")
-//                try keychain.remove("accessToken.refreshToken")
-//                try keychain.remove("accessToken.idToken")
-//                try keychain.remove("accessToken.accessTokenExpiry")
-//            } catch let error {
-//                print("error: \(error)")
-//            }
-//        } else {
-//            print("clearToken error: No client Id provided")
-//        }
-//    }
+    static func setUserInfo(with accessToken: String, _ userData: EditableUserData, completion: @escaping (Error?) -> Void) {
+        guard let url = URL(string: "https://api.github.com/user") else { return }
+        let headers = ["Authorization": "token \(accessToken)", "Accept": "application/json"]
+        let parameters = [
+                "name": userData.name,
+                "blog": userData.blog,
+                "company": userData.company,
+                "location": userData.location,
+                "bio": userData.bio
+            ]
+        request(url, method: .patch, parameters: parameters, encoding: URLEncoding.default, headers: headers).validate().responseJSON { response in
+            switch response.result {
+            case .success:
+                completion(nil)
+            case .failure:
+                completion(TypeError.dataIsAbsent)
+            }
+        }
+    }
 }
+
+

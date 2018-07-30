@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3616ADAB210B8DC40031DF02 /* StartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3616ADAA210B8DC40031DF02 /* StartViewController.swift */; };
+		3616ADAD210BA87B0031DF02 /* TabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3616ADAC210BA87B0031DF02 /* TabBarViewController.swift */; };
 		366D53DD210845A0002A9055 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 366D53DC210845A0002A9055 /* AppDelegate.swift */; };
 		366D53DF210845A0002A9055 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 366D53DE210845A0002A9055 /* LoginViewController.swift */; };
 		366D53E2210845A0002A9055 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 366D53E0210845A0002A9055 /* Main.storyboard */; };
@@ -16,7 +18,6 @@
 		366D53FB2108A217002A9055 /* GitHubConnectionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 366D53FA2108A217002A9055 /* GitHubConnectionManager.swift */; };
 		36D7DA8D21099A8600BFD518 /* ProfileTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36D7DA8C21099A8600BFD518 /* ProfileTableViewController.swift */; };
 		36D7DA8F2109A81300BFD518 /* UIViewControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36D7DA8E2109A81300BFD518 /* UIViewControllerExtension.swift */; };
-		36D7DA922109AE5400BFD518 /* KeychainPasswordItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36D7DA912109AE5400BFD518 /* KeychainPasswordItem.swift */; };
 		36D7DA952109B4E600BFD518 /* GitHubApp.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 36D7DA932109B4E600BFD518 /* GitHubApp.xcdatamodeld */; };
 		36D7DA972109C22F00BFD518 /* CoreDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36D7DA962109C22F00BFD518 /* CoreDataModel.swift */; };
 		36D7DA9A2109DEB300BFD518 /* UserInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36D7DA992109DEB300BFD518 /* UserInfo.swift */; };
@@ -24,11 +25,22 @@
 		36D7DAA32109FB0E00BFD518 /* ProfileTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36D7DAA22109FB0E00BFD518 /* ProfileTableViewCell.swift */; };
 		36D7DAA62109FD0D00BFD518 /* ProfileSectionType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36D7DAA52109FD0D00BFD518 /* ProfileSectionType.swift */; };
 		36D7DAA8210A026700BFD518 /* UIImageViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36D7DAA7210A026700BFD518 /* UIImageViewExtension.swift */; };
+		36E4A8D3210DD55B000B3088 /* EditProfileSectionType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36E4A8D2210DD55B000B3088 /* EditProfileSectionType.swift */; };
+		36E4A8D5210DD752000B3088 /* EditProfileTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36E4A8D4210DD752000B3088 /* EditProfileTableViewController.swift */; };
+		36E4A8D9210DDBDF000B3088 /* AvatarTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36E4A8D8210DDBDF000B3088 /* AvatarTableViewCell.swift */; };
+		36E4A8DB210DDBEC000B3088 /* CredentialsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36E4A8DA210DDBEC000B3088 /* CredentialsTableViewCell.swift */; };
+		36E4A8DD210DDBF7000B3088 /* BioTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36E4A8DC210DDBF7000B3088 /* BioTableViewCell.swift */; };
+		36E4A8DF210DDEFD000B3088 /* UITableViewCellExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36E4A8DE210DDEFD000B3088 /* UITableViewCellExtension.swift */; };
+		36E4A8E1210DE812000B3088 /* ArrayExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36E4A8E0210DE812000B3088 /* ArrayExtension.swift */; };
+		36E4A8E3210DEAE2000B3088 /* ProfileTextFieldsPlaysholders.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36E4A8E2210DEAE2000B3088 /* ProfileTextFieldsPlaysholders.swift */; };
+		36E4A8E7210EFBB2000B3088 /* TypeError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36E4A8E6210EFBB2000B3088 /* TypeError.swift */; };
 		4C0875856BF36266433BD8F1 /* Pods_GitHubApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22F866101149E08287726B67 /* Pods_GitHubApp.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		22F866101149E08287726B67 /* Pods_GitHubApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GitHubApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		3616ADAA210B8DC40031DF02 /* StartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartViewController.swift; sourceTree = "<group>"; };
+		3616ADAC210BA87B0031DF02 /* TabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarViewController.swift; sourceTree = "<group>"; };
 		366D53D9210845A0002A9055 /* GitHubApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GitHubApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		366D53DC210845A0002A9055 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		366D53DE210845A0002A9055 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
@@ -42,7 +54,6 @@
 		36D7DA8C21099A8600BFD518 /* ProfileTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileTableViewController.swift; sourceTree = "<group>"; };
 		36D7DA8E2109A81300BFD518 /* UIViewControllerExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewControllerExtension.swift; sourceTree = "<group>"; };
 		36D7DA902109A8F900BFD518 /* GitHubApp.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = GitHubApp.entitlements; sourceTree = "<group>"; };
-		36D7DA912109AE5400BFD518 /* KeychainPasswordItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeychainPasswordItem.swift; sourceTree = "<group>"; };
 		36D7DA942109B4E600BFD518 /* CoreDataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = CoreDataModel.xcdatamodel; sourceTree = "<group>"; };
 		36D7DA962109C22F00BFD518 /* CoreDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataModel.swift; sourceTree = "<group>"; };
 		36D7DA992109DEB300BFD518 /* UserInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfo.swift; sourceTree = "<group>"; };
@@ -50,6 +61,15 @@
 		36D7DAA22109FB0E00BFD518 /* ProfileTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileTableViewCell.swift; sourceTree = "<group>"; };
 		36D7DAA52109FD0D00BFD518 /* ProfileSectionType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileSectionType.swift; sourceTree = "<group>"; };
 		36D7DAA7210A026700BFD518 /* UIImageViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImageViewExtension.swift; sourceTree = "<group>"; };
+		36E4A8D2210DD55B000B3088 /* EditProfileSectionType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileSectionType.swift; sourceTree = "<group>"; };
+		36E4A8D4210DD752000B3088 /* EditProfileTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileTableViewController.swift; sourceTree = "<group>"; };
+		36E4A8D8210DDBDF000B3088 /* AvatarTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvatarTableViewCell.swift; sourceTree = "<group>"; };
+		36E4A8DA210DDBEC000B3088 /* CredentialsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CredentialsTableViewCell.swift; sourceTree = "<group>"; };
+		36E4A8DC210DDBF7000B3088 /* BioTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BioTableViewCell.swift; sourceTree = "<group>"; };
+		36E4A8DE210DDEFD000B3088 /* UITableViewCellExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITableViewCellExtension.swift; sourceTree = "<group>"; };
+		36E4A8E0210DE812000B3088 /* ArrayExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArrayExtension.swift; sourceTree = "<group>"; };
+		36E4A8E2210DEAE2000B3088 /* ProfileTextFieldsPlaysholders.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileTextFieldsPlaysholders.swift; sourceTree = "<group>"; };
+		36E4A8E6210EFBB2000B3088 /* TypeError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TypeError.swift; sourceTree = "<group>"; };
 		6DF7D841AA8C20FFFA5B0AF7 /* Pods-GitHubApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GitHubApp.debug.xcconfig"; path = "Pods/Target Support Files/Pods-GitHubApp/Pods-GitHubApp.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -140,6 +160,8 @@
 			children = (
 				36D7DAA12109FAEB00BFD518 /* TableView */,
 				366D53DE210845A0002A9055 /* LoginViewController.swift */,
+				3616ADAA210B8DC40031DF02 /* StartViewController.swift */,
+				3616ADAC210BA87B0031DF02 /* TabBarViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -147,7 +169,6 @@
 		366D53F92108A203002A9055 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				36D7DA912109AE5400BFD518 /* KeychainPasswordItem.swift */,
 				366D53FA2108A217002A9055 /* GitHubConnectionManager.swift */,
 				36D7DA962109C22F00BFD518 /* CoreDataModel.swift */,
 			);
@@ -159,6 +180,8 @@
 			children = (
 				36D7DA8E2109A81300BFD518 /* UIViewControllerExtension.swift */,
 				36D7DAA7210A026700BFD518 /* UIImageViewExtension.swift */,
+				36E4A8DE210DDEFD000B3088 /* UITableViewCellExtension.swift */,
+				36E4A8E0210DE812000B3088 /* ArrayExtension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -175,8 +198,8 @@
 		36D7DAA12109FAEB00BFD518 /* TableView */ = {
 			isa = PBXGroup;
 			children = (
-				36D7DA8C21099A8600BFD518 /* ProfileTableViewController.swift */,
-				36D7DAA22109FB0E00BFD518 /* ProfileTableViewCell.swift */,
+				36E4A8D7210DDBB2000B3088 /* ProfileEdit */,
+				36E4A8D6210DDBAA000B3088 /* Profile */,
 			);
 			path = TableView;
 			sourceTree = "<group>";
@@ -185,8 +208,31 @@
 			isa = PBXGroup;
 			children = (
 				36D7DAA52109FD0D00BFD518 /* ProfileSectionType.swift */,
+				36E4A8D2210DD55B000B3088 /* EditProfileSectionType.swift */,
+				36E4A8E2210DEAE2000B3088 /* ProfileTextFieldsPlaysholders.swift */,
+				36E4A8E6210EFBB2000B3088 /* TypeError.swift */,
 			);
 			path = Enums;
+			sourceTree = "<group>";
+		};
+		36E4A8D6210DDBAA000B3088 /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+				36D7DA8C21099A8600BFD518 /* ProfileTableViewController.swift */,
+				36D7DAA22109FB0E00BFD518 /* ProfileTableViewCell.swift */,
+			);
+			path = Profile;
+			sourceTree = "<group>";
+		};
+		36E4A8D7210DDBB2000B3088 /* ProfileEdit */ = {
+			isa = PBXGroup;
+			children = (
+				36E4A8D4210DD752000B3088 /* EditProfileTableViewController.swift */,
+				36E4A8D8210DDBDF000B3088 /* AvatarTableViewCell.swift */,
+				36E4A8DA210DDBEC000B3088 /* CredentialsTableViewCell.swift */,
+				36E4A8DC210DDBF7000B3088 /* BioTableViewCell.swift */,
+			);
+			path = ProfileEdit;
 			sourceTree = "<group>";
 		};
 		8C70E212E4477237621EFF93 /* Pods */ = {
@@ -316,19 +362,29 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				36E4A8E3210DEAE2000B3088 /* ProfileTextFieldsPlaysholders.swift in Sources */,
+				36E4A8D9210DDBDF000B3088 /* AvatarTableViewCell.swift in Sources */,
 				36D7DA8D21099A8600BFD518 /* ProfileTableViewController.swift in Sources */,
-				36D7DA922109AE5400BFD518 /* KeychainPasswordItem.swift in Sources */,
+				36E4A8DD210DDBF7000B3088 /* BioTableViewCell.swift in Sources */,
+				3616ADAB210B8DC40031DF02 /* StartViewController.swift in Sources */,
 				36D7DA972109C22F00BFD518 /* CoreDataModel.swift in Sources */,
 				36D7DAA32109FB0E00BFD518 /* ProfileTableViewCell.swift in Sources */,
+				36E4A8D3210DD55B000B3088 /* EditProfileSectionType.swift in Sources */,
 				366D53DF210845A0002A9055 /* LoginViewController.swift in Sources */,
 				36D7DA952109B4E600BFD518 /* GitHubApp.xcdatamodeld in Sources */,
 				366D53FB2108A217002A9055 /* GitHubConnectionManager.swift in Sources */,
 				36D7DAA62109FD0D00BFD518 /* ProfileSectionType.swift in Sources */,
 				36D7DA8F2109A81300BFD518 /* UIViewControllerExtension.swift in Sources */,
+				36E4A8E7210EFBB2000B3088 /* TypeError.swift in Sources */,
 				36D7DA9A2109DEB300BFD518 /* UserInfo.swift in Sources */,
+				36E4A8D5210DD752000B3088 /* EditProfileTableViewController.swift in Sources */,
 				36D7DA9C2109DED500BFD518 /* OAuth2Token.swift in Sources */,
 				36D7DAA8210A026700BFD518 /* UIImageViewExtension.swift in Sources */,
+				36E4A8DB210DDBEC000B3088 /* CredentialsTableViewCell.swift in Sources */,
+				36E4A8DF210DDEFD000B3088 /* UITableViewCellExtension.swift in Sources */,
+				3616ADAD210BA87B0031DF02 /* TabBarViewController.swift in Sources */,
 				366D53DD210845A0002A9055 /* AppDelegate.swift in Sources */,
+				36E4A8E1210DE812000B3088 /* ArrayExtension.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

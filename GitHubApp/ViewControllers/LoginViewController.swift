@@ -17,22 +17,17 @@ class LoginViewController: UIViewController, SFSafariViewControllerDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.navigationController?.navigationBar.isHidden = true
     }
 
     @IBAction func loginButtonTapped(_ sender: UIButton) {
         self.safariAuthenticator = SFAuthenticationSession(url: URL(string: GitHubConnectionManager.link.addingPercentEncoding(withAllowedCharacters: CharacterSet.urlQueryAllowed)!)!, callbackURLScheme: GitHubConnectionManager.redirectURL, completionHandler: { (url, error) in
             if let url = url {
-                GitHubConnectionManager.handle(redirectURL: url) { response in
-                    GitHubConnectionManager.getUserInfo(with: response.accessToken) { response in
-                        print(response)
-                        guard let userTabBarController = self.storyboard?.instantiateViewController(withIdentifier: "TabBarController") as? UITabBarController else { return }
-                        for viewController in userTabBarController.viewControllers! {
-                            if viewController is ProfileTableViewController {
-                                guard let profileVC = viewController as? ProfileTableViewController else { return }
-                                profileVC.profileInfo = response
-                                break
-                            }
-                        }
+                GitHubConnectionManager.handle(redirectURL: url) { token in
+                    GitHubConnectionManager.getUserInfo(with: token.accessToken) { response in
+                        guard let userTabBarController = self.storyboard?.instantiateViewController(withIdentifier: TabBarViewController.reuseIdentifier) as? TabBarViewController else { return }
+                        userTabBarController.userInfo = response
+                        userTabBarController.token = token.accessToken
                         self.navigationController?.pushViewController(userTabBarController, animated: true)
                     }
                 }
