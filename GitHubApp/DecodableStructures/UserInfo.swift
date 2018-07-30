@@ -13,34 +13,43 @@ struct UserInfo: Decodable {
     let avatarURL: String?
     let bio: String?
     let login: String?
-    var name: String?
+    let name: String?
+    let blog: String?
+    let email: String?
+    let company: String?
+    let location: String?
     
-    var credentials: [(key: String, value: String?)] = [("email", nil),
-                                         ("blog", nil),
-                                         ("company", nil),
-                                         ("location", nil)]
+    var credentials: [(key: String, value: String?)] {
+        return [
+            (Keys.email.rawValue, email),
+            (Keys.blog.rawValue, blog),
+            (Keys.company.rawValue, company),
+            (Keys.location.rawValue, location)
+        ]
+    }
     
-    var editableData: [(key: String, value: String?)] = [("name", nil),
-                                                         ("blog", nil),
-                                                         ("company", nil),
-                                                         ("location", nil)]
+    var editable: [(key: String, value: String?)] {
+        return [
+            (Keys.name.rawValue, name),
+            (Keys.blog.rawValue, blog),
+            (Keys.company.rawValue, company),
+            (Keys.location.rawValue, location)
+        ]
+    }
     
-    enum CodingKeys : String, CodingKey {
+    enum Keys: String, CodingKey {
         case avatarURL = "avatar_url", bio, login, name, email, location, blog, company
     }
     
     init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
+        let container = try decoder.container(keyedBy: Keys.self)
         avatarURL = try container.decode(String.self, forKey: .avatarURL)
         bio = try container.decode(String?.self, forKey: .bio)
         login = try container.decode(String.self, forKey: .login)
         name = try container.decode(String.self, forKey: .name)
-        for index in credentials.indices {
-            credentials[index].value = try! container.decode(String?.self, forKey: CodingKeys(rawValue: credentials[index].key)!)
-        }
-        for index in editableData.indices{
-            if index == 0 { editableData[index].value = name }
-            else { editableData[index].value = credentials[index].value }
-        }
+        blog = try container.decode(String.self, forKey: .blog)
+        email = try container.decode(String.self, forKey: .email)
+        company = try container.decode(String.self, forKey: .company)
+        location = try container.decode(String.self, forKey: .location)
     }
 }

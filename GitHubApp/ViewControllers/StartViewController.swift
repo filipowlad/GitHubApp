@@ -13,6 +13,7 @@ class StartViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationController?.navigationBar.isHidden = true
+        UIApplication.shared.statusBarStyle = .default
         checkUserState()
     }
     

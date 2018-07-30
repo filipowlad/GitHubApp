@@ -16,6 +16,11 @@ class TabBarViewController: UITabBarController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationController?.navigationBar.isHidden = false
+        UIApplication.shared.statusBarStyle = .lightContent
+        refreshProfile()
+    }
+    
+    private func refreshProfile() {
         for viewController in self.viewControllers! {
             if viewController is ProfileTableViewController {
                 guard let profileVC = viewController as? ProfileTableViewController else { return }
@@ -29,6 +34,7 @@ class TabBarViewController: UITabBarController {
         guard let editVC = storyboard?.instantiateViewController(withIdentifier: EditProfileTableViewController.reuseIdentifier) as? EditProfileTableViewController else { return }
         editVC.userInfo = userInfo
         editVC.token = token
+        editVC.userDataSenderDelegate = self
         self.navigationController?.pushViewController(editVC, animated: true)
     }
     
@@ -37,4 +43,15 @@ class TabBarViewController: UITabBarController {
         guard let loginNC = storyboard?.instantiateViewController(withIdentifier: "loginNavigationController") as? UINavigationController else { return }
         UIApplication.shared.keyWindow?.rootViewController = loginNC
     }
+}
+
+extension TabBarViewController: UserDataSender {
+    func getUserData(_ userInfo: UserInfo) {
+        self.userInfo = userInfo
+        refreshProfile()
+    }
+}
+
+protocol UserDataSender {
+    func getUserData(_ userInfo: UserInfo)
 }

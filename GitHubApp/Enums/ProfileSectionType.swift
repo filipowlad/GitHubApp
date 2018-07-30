@@ -9,6 +9,5 @@
 import Foundation
 
 enum ProfileSectionType: Int {
-    case profileInfo
-    case usersActions
+    case profileInfo, usersCredentials, usersActions
 }

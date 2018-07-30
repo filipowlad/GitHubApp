@@ -11,10 +11,12 @@ import UIKit
 class EditProfileTableViewController: UITableViewController {
 
     var userInfo: UserInfo!
+    var token: String!
     var imageSetDelegate: ImageSetter!
+    var userDataSenderDelegate: UserDataSender!
+    
     var editableUserData = EditableUserData()
     var credentials = [String: String]()
-    var token: String!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,10 +28,12 @@ class EditProfileTableViewController: UITableViewController {
     }
     
     @IBAction func saveButtonTapped(_ sender: Any) {
-        GitHubConnectionManager.setUserInfo(with: token, editableUserData) {
-            if let error = $0 {
-                print(error.localizedDescription)
+        GitHubConnectionManager.setUserInfo(with: token, editableUserData) { response in
+            guard let userInfo = response else {
+                self.navigationController?.popViewController(animated: true)
+                return
             }
+            self.userDataSenderDelegate.getUserData(userInfo)
             self.navigationController?.popViewController(animated: true)
         }
     }
@@ -44,8 +48,7 @@ class EditProfileTableViewController: UITableViewController {
         case .avatar, .bio:
             return 1
         case .credentials:
-            let numberOfRows = userInfo.credentials.count
-            return numberOfRows
+            return 4
         }
     }
     
@@ -59,9 +62,9 @@ class EditProfileTableViewController: UITableViewController {
             cell.imageSharingDelegate = self
             return cell
         case .credentials:
-            guard let cell = tableView.dequeueReusableCell(withIdentifier: CredentialsTableViewCell.reuseIdentifier, for: indexPath) as? CredentialsTableViewCell else { return UITableViewCell() }
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: EditCredentialTableViewCell.reuseIdentifier, for: indexPath) as? EditCredentialTableViewCell else { return UITableViewCell() }
             cell.credentialsDelegate = self
-            cell.configure(with: userInfo.editableData[indexPath.row])
+            cell.configure(with: userInfo.editable[indexPath.row])
             return cell
         case .bio:
             guard let cell = tableView.dequeueReusableCell(withIdentifier: BioTableViewCell.reuseIdentifier, for: indexPath) as? BioTableViewCell else { return UITableViewCell() }
@@ -86,12 +89,11 @@ extension EditProfileTableViewController: ImageGetter {
 extension EditProfileTableViewController: CredentialsData {
     func getCredentials(_ key: String, _ value: String) {
         credentials[key] = value
-        print(credentials)
         if credentials.count == 4 {
             self.editableUserData.name = credentials["name"]!
             self.editableUserData.blog = credentials["blog"]!
             self.editableUserData.company = credentials["company"]!
-            self.editableUserData.company = credentials["location"]!
+            self.editableUserData.location = credentials["location"]!
         }
     }
 }

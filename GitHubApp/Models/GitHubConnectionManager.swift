@@ -19,22 +19,13 @@ class GitHubConnectionManager {
     static var tokenURL = "https://github.com/login/oauth/access_token"
     static var clientID = "53ad93d75566f2be8721"
     static var clientSecret = "f6793aa0ec3a7c0badee13d8a9c3aeb8269e306d"
+    static var scopes = "user,public_repo"
 
     static var link: String {
-        return "\(authURL)?client_id=\(clientID)&redirect_uri=\(redirectURL)"
+        return "\(authURL)?client_id=\(clientID)&scope=\(scopes)&redirect_uri=\(redirectURL)"
     }
     
     static func handle(redirectURL: URL, completion: @escaping (OAuth2Token) -> Void) {
-        if #available(iOS 11.0, *) { } else {
-            if let svc = self.safariAuthenticator as? SFSafariViewController {
-                svc.dismiss(animated: true, completion: nil)
-                self.safariAuthenticator = nil
-            }
-        }
-        if GitHubConnectionManager.redirectURL.isEmpty {
-            print("Redirect URL is empty")
-            return
-        }
         let components = URLComponents(url: redirectURL, resolvingAgainstBaseURL: true)
         if let queryItems = components?.queryItems {
             let codeItems = queryItems.filter({ (item) -> Bool in
@@ -71,6 +62,7 @@ class GitHubConnectionManager {
         guard let url = URL(string: "https://api.github.com/user") else { return }
         let headers = ["Authorization": "token \(accessToken)", "Accept": "application/json"]
         request(url, method: .get, parameters: nil, encoding: URLEncoding.default, headers: headers).validate().responseJSON { response in
+            print(response)
             switch response.result {
             case .success:
                 guard let jsonData = response.data else { return }
@@ -82,22 +74,25 @@ class GitHubConnectionManager {
         }
     }
     
-    static func setUserInfo(with accessToken: String, _ userData: EditableUserData, completion: @escaping (Error?) -> Void) {
+    static func setUserInfo(with accessToken: String, _ userData: EditableUserData, completion: @escaping (UserInfo?) -> Void) {
         guard let url = URL(string: "https://api.github.com/user") else { return }
-        let headers = ["Authorization": "token \(accessToken)", "Accept": "application/json"]
+        let headers = ["Authorization": "token \(accessToken)", "Content-Type": "application/json"]
         let parameters = [
-                "name": userData.name,
-                "blog": userData.blog,
-                "company": userData.company,
-                "location": userData.location,
-                "bio": userData.bio
+            "name": "\(userData.name)",
+            "blog": "\(userData.blog)",
+            "company": "\(userData.company)",
+            "location": "\(userData.location)",
+            "bio": "\(userData.bio)"
             ]
-        request(url, method: .patch, parameters: parameters, encoding: URLEncoding.default, headers: headers).validate().responseJSON { response in
+        request(url, method: .patch, parameters: parameters, encoding: JSONEncoding.default, headers: headers).validate().responseJSON { response in
+            print("\n\n", response, "\n")
             switch response.result {
             case .success:
-                completion(nil)
+                guard let jsonData = response.data else { return }
+                let jsonResponse = try? JSONDecoder().decode(UserInfo.self, from: jsonData)
+                completion(jsonResponse)
             case .failure:
-                completion(TypeError.dataIsAbsent)
+                completion(nil)
             }
         }
     }

@@ -1,5 +1,5 @@
 //
-//  CredentialsTableViewCell.swift
+//  EditCredentialTableViewCell.swift
 //  GitHubApp
 //
 //  Created by Vladyslav Filipov on 29.07.2018.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class CredentialsTableViewCell: UITableViewCell {
+class EditCredentialTableViewCell: UITableViewCell {
     
     @IBOutlet weak var credentialTypeLabel: UILabel!
     @IBOutlet weak var credentialTextField: UITextField!
@@ -26,7 +26,7 @@ class CredentialsTableViewCell: UITableViewCell {
     }
 }
 
-extension CredentialsTableViewCell: UITextFieldDelegate {
+extension EditCredentialTableViewCell: UITextFieldDelegate {
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         let currentText = textField.text ?? ""
         guard let stringRange = Range(range, in: currentText) else { return false }
