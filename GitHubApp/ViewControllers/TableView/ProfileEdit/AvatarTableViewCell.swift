@@ -18,6 +18,11 @@ class AvatarTableViewCell: UITableViewCell {
         avatarImageView.setRoundedWith(borderWidth: 2.4, color: UIColor.purple)
     }
     
+    func configure(with avatar: UIImage) {
+        avatarImageView.image = avatar
+        avatarImageView.setRoundedWith(borderWidth: 2.4, color: UIColor.purple)
+    }
+    
     @IBAction func changePhotoButtonTapped(_ sender: UIButton) {
         imageSharingDelegate.pickImage()
     }
@@ -26,5 +31,6 @@ class AvatarTableViewCell: UITableViewCell {
 extension AvatarTableViewCell: ImageSetter {
     func setImage(_ image: UIImage) {
         self.avatarImageView.image = image
+        self.layoutIfNeeded()
     }
 }

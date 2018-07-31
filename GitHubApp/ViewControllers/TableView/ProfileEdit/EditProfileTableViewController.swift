@@ -13,6 +13,7 @@ class EditProfileTableViewController: UITableViewController, Refresh {
     var userInfo: UserInfo!
     var token: String!
     var imageSetDelegate: ImageSetter!
+    var image: UIImage?
     
     var editableUserData = EditableUserData()
     var credentials = [String: String]()
@@ -71,7 +72,11 @@ class EditProfileTableViewController: UITableViewController, Refresh {
         switch section {
         case .avatar:
             guard let cell = tableView.dequeueReusableCell(withIdentifier: AvatarTableViewCell.reuseIdentifier, for: indexPath) as? AvatarTableViewCell else { return UITableViewCell() }
-            cell.configure(with: userInfo.avatarURL!)
+            if let image = image {
+                cell.configure(with: image)
+            } else {
+                cell.configure(with: userInfo.avatarURL!)
+            }
             self.imageSetDelegate = cell
             cell.imageSharingDelegate = self
             return cell
@@ -126,10 +131,11 @@ extension EditProfileTableViewController: BioData {
 extension EditProfileTableViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
     func imagePickerController(_: UIImagePickerController, didFinishPickingMediaWithInfo info: [String: Any]) {
-        guard let image = info[UIImagePickerControllerOriginalImage] as? UIImage else { return }
-        imageSetDelegate.setImage(image)
-        self.removeSpinner()
+        
         dismiss(animated: true, completion: nil)
+        guard let image = info[UIImagePickerControllerOriginalImage] as? UIImage else { return }
+        self.image = image
+        self.removeSpinner()
     }
     
     func imagePickerControllerDidCancel(_: UIImagePickerController) {

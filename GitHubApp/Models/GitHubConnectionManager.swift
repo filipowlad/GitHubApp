@@ -62,7 +62,6 @@ class GitHubConnectionManager {
         guard let url = URL(string: "https://api.github.com/user") else { return }
         let headers = ["Authorization": "token \(accessToken)", "Accept": "application/json"]
         request(url, method: .get, parameters: nil, encoding: URLEncoding.default, headers: headers).validate().responseJSON { response in
-            print(response)
             switch response.result {
             case .success:
                 guard let jsonData = response.data else { return }
@@ -85,7 +84,6 @@ class GitHubConnectionManager {
             "bio": "\(userData.bio)"
             ]
         request(url, method: .patch, parameters: parameters, encoding: JSONEncoding.default, headers: headers).validate().responseJSON { response in
-            print("\n\n", response, "\n")
             switch response.result {
             case .success:
                 guard let jsonData = response.data else { return }
