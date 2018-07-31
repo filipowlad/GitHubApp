@@ -46,7 +46,7 @@ struct UserInfo: Decodable {
         avatarURL = try container.decode(String.self, forKey: .avatarURL)
         bio = try container.decode(String?.self, forKey: .bio)
         login = try container.decode(String.self, forKey: .login)
-        name = try container.decode(String.self, forKey: .name)
+        name = try container.decode(String?.self, forKey: .name)
         blog = try container.decode(String?.self, forKey: .blog)
         email = try container.decode(String?.self, forKey: .email)
         company = try container.decode(String?.self, forKey: .company)
