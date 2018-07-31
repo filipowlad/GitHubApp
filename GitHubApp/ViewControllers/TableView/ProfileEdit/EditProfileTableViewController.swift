@@ -8,18 +8,22 @@
 
 import UIKit
 
-class EditProfileTableViewController: UITableViewController {
+class EditProfileTableViewController: UITableViewController, Refresh {
 
     var userInfo: UserInfo!
     var token: String!
     var imageSetDelegate: ImageSetter!
-    var userDataSenderDelegate: UserDataSender!
     
     var editableUserData = EditableUserData()
     var credentials = [String: String]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        refreshTable(in: self, with: token) { response in
+            guard let response = response else { return }
+            self.userInfo = response
+            self.tableView.reloadData()
+        }
         self.tableView.tableFooterView = UIView(frame: CGRect.zero)
     }
     
@@ -28,12 +32,9 @@ class EditProfileTableViewController: UITableViewController {
     }
     
     @IBAction func saveButtonTapped(_ sender: Any) {
+        self.displaySpinner()
         GitHubConnectionManager.setUserInfo(with: token, editableUserData) { response in
-            guard let userInfo = response else {
-                self.navigationController?.popViewController(animated: true)
-                return
-            }
-            self.userDataSenderDelegate.getUserData(userInfo)
+            self.removeSpinner()
             self.navigationController?.popViewController(animated: true)
         }
     }
@@ -44,11 +45,15 @@ class EditProfileTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         guard let section = EditProfileSectionType(rawValue: section) else { return 0 }
-        switch section {
-        case .avatar, .bio:
-            return 1
-        case .credentials:
-            return 4
+        if let _ = userInfo {
+            switch section {
+            case .avatar, .bio:
+                return 1
+            case .credentials:
+                return 4
+            }
+        } else {
+            return 0
         }
     }
     
@@ -120,14 +125,6 @@ extension EditProfileTableViewController: UIImagePickerControllerDelegate, UINav
         UINavigationBar.appearance().titleTextAttributes = [NSAttributedStringKey.foregroundColor: UIColor.white]
         dismiss(animated: true, completion: nil)
     }
-}
-
-protocol CredentialsData {
-    func getCredentials(_ key: String, _ value: String)
-}
-
-protocol BioData {
-    func getBio(_ value: String)
 }
 
 struct EditableUserData {

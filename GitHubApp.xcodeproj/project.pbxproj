@@ -35,6 +35,8 @@
 		36E4A8E3210DEAE2000B3088 /* ProfileTextFieldsPlaysholders.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36E4A8E2210DEAE2000B3088 /* ProfileTextFieldsPlaysholders.swift */; };
 		36E4A8E7210EFBB2000B3088 /* TypeError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36E4A8E6210EFBB2000B3088 /* TypeError.swift */; };
 		36E4A8E9210F3B0D000B3088 /* ProfileCredentialTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36E4A8E8210F3B0D000B3088 /* ProfileCredentialTableViewCell.swift */; };
+		36E4A8F021103A61000B3088 /* Protocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36E4A8EF21103A61000B3088 /* Protocols.swift */; };
+		36E4A8F221103ABC000B3088 /* RefreshExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36E4A8F121103ABC000B3088 /* RefreshExtension.swift */; };
 		4C0875856BF36266433BD8F1 /* Pods_GitHubApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22F866101149E08287726B67 /* Pods_GitHubApp.framework */; };
 /* End PBXBuildFile section */
 
@@ -72,6 +74,8 @@
 		36E4A8E2210DEAE2000B3088 /* ProfileTextFieldsPlaysholders.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileTextFieldsPlaysholders.swift; sourceTree = "<group>"; };
 		36E4A8E6210EFBB2000B3088 /* TypeError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TypeError.swift; sourceTree = "<group>"; };
 		36E4A8E8210F3B0D000B3088 /* ProfileCredentialTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileCredentialTableViewCell.swift; sourceTree = "<group>"; };
+		36E4A8EF21103A61000B3088 /* Protocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Protocols.swift; sourceTree = "<group>"; };
+		36E4A8F121103ABC000B3088 /* RefreshExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RefreshExtension.swift; sourceTree = "<group>"; };
 		6DF7D841AA8C20FFFA5B0AF7 /* Pods-GitHubApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GitHubApp.debug.xcconfig"; path = "Pods/Target Support Files/Pods-GitHubApp/Pods-GitHubApp.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -116,6 +120,7 @@
 		366D53DB210845A0002A9055 /* GitHubApp */ = {
 			isa = PBXGroup;
 			children = (
+				36E4A8EE21103A4E000B3088 /* Protocols */,
 				36D7DAA42109FCF600BFD518 /* Enums */,
 				36D7DA982109DE9B00BFD518 /* DecodableStructures */,
 				36D7DA902109A8F900BFD518 /* GitHubApp.entitlements */,
@@ -184,6 +189,7 @@
 				36D7DAA7210A026700BFD518 /* UIImageViewExtension.swift */,
 				36E4A8DE210DDEFD000B3088 /* UITableViewCellExtension.swift */,
 				36E4A8E0210DE812000B3088 /* ArrayExtension.swift */,
+				36E4A8F121103ABC000B3088 /* RefreshExtension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -236,6 +242,14 @@
 				36E4A8DC210DDBF7000B3088 /* BioTableViewCell.swift */,
 			);
 			path = ProfileEdit;
+			sourceTree = "<group>";
+		};
+		36E4A8EE21103A4E000B3088 /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				36E4A8EF21103A61000B3088 /* Protocols.swift */,
+			);
+			path = Protocols;
 			sourceTree = "<group>";
 		};
 		8C70E212E4477237621EFF93 /* Pods */ = {
@@ -330,10 +344,12 @@
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-GitHubApp/Pods-GitHubApp-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
+				"${BUILT_PRODUCTS_DIR}/AlamofireImage/AlamofireImage.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AlamofireImage.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -370,6 +386,7 @@
 				36D7DA8D21099A8600BFD518 /* ProfileTableViewController.swift in Sources */,
 				36E4A8DD210DDBF7000B3088 /* BioTableViewCell.swift in Sources */,
 				3616ADAB210B8DC40031DF02 /* StartViewController.swift in Sources */,
+				36E4A8F021103A61000B3088 /* Protocols.swift in Sources */,
 				36D7DA972109C22F00BFD518 /* CoreDataModel.swift in Sources */,
 				36D7DAA32109FB0E00BFD518 /* ProfileTableViewCell.swift in Sources */,
 				36E4A8D3210DD55B000B3088 /* EditProfileSectionType.swift in Sources */,
@@ -385,6 +402,7 @@
 				36D7DAA8210A026700BFD518 /* UIImageViewExtension.swift in Sources */,
 				36E4A8DB210DDBEC000B3088 /* EditCredentialTableViewCell.swift in Sources */,
 				36E4A8DF210DDEFD000B3088 /* UITableViewCellExtension.swift in Sources */,
+				36E4A8F221103ABC000B3088 /* RefreshExtension.swift in Sources */,
 				3616ADAD210BA87B0031DF02 /* TabBarViewController.swift in Sources */,
 				366D53DD210845A0002A9055 /* AppDelegate.swift in Sources */,
 				36E4A8E9210F3B0D000B3088 /* ProfileCredentialTableViewCell.swift in Sources */,

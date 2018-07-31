@@ -18,25 +18,20 @@ class StartViewController: UIViewController {
     }
     
     private func checkUserState() {
-        
+        self.displaySpinner()
         CoreDataModel.getRecord { token in
             guard let token = token else {
+                self.removeSpinner()
                 goToLogin()
                 return
             }
-            if  token.isEmpty { goToLogin() }
+            if  token.isEmpty {
+                self.removeSpinner()
+                goToLogin() }
             else {
-                GitHubConnectionManager.getUserInfo(with: token) { response in
-                    guard let response = response else {
-                        CoreDataModel.deleteRecords()
-                        self.goToLogin()
-                        return
-                    }
-                    guard let userTabBarController = self.storyboard?.instantiateViewController(withIdentifier: TabBarViewController.reuseIdentifier) as? TabBarViewController else { return }
-                    userTabBarController.userInfo = response
-                    userTabBarController.token = token
-                    self.navigationController?.pushViewController(userTabBarController, animated: true)
-                }
+                guard let userTabBarController = self.storyboard?.instantiateViewController(withIdentifier: TabBarViewController.reuseIdentifier) as? TabBarViewController else { return }
+                userTabBarController.token = token
+                self.navigationController?.pushViewController(userTabBarController, animated: true)
             }
         }
     }

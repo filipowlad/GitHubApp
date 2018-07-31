@@ -10,7 +10,6 @@ import UIKit
 
 class TabBarViewController: UITabBarController {
     
-    var userInfo: UserInfo!
     var token: String!
     
     override func viewDidLoad() {
@@ -24,7 +23,7 @@ class TabBarViewController: UITabBarController {
         for viewController in self.viewControllers! {
             if viewController is ProfileTableViewController {
                 guard let profileVC = viewController as? ProfileTableViewController else { return }
-                profileVC.userInfo = userInfo
+                profileVC.token = token
                 break
             }
         }
@@ -32,9 +31,7 @@ class TabBarViewController: UITabBarController {
     
     @IBAction func editButtonTapped(_ sender: Any) {
         guard let editVC = storyboard?.instantiateViewController(withIdentifier: EditProfileTableViewController.reuseIdentifier) as? EditProfileTableViewController else { return }
-        editVC.userInfo = userInfo
         editVC.token = token
-        editVC.userDataSenderDelegate = self
         self.navigationController?.pushViewController(editVC, animated: true)
     }
     
@@ -43,15 +40,4 @@ class TabBarViewController: UITabBarController {
         guard let loginNC = storyboard?.instantiateViewController(withIdentifier: "loginNavigationController") as? UINavigationController else { return }
         UIApplication.shared.keyWindow?.rootViewController = loginNC
     }
-}
-
-extension TabBarViewController: UserDataSender {
-    func getUserData(_ userInfo: UserInfo) {
-        self.userInfo = userInfo
-        refreshProfile()
-    }
-}
-
-protocol UserDataSender {
-    func getUserData(_ userInfo: UserInfo)
 }

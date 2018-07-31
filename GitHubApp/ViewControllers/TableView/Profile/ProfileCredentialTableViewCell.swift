@@ -15,6 +15,12 @@ class ProfileCredentialTableViewCell: UITableViewCell {
     
     func configure(with info: (key: String, value: String?)) {
         keyLabel.text = info.key + ":"
-        valueLabel.text = info.value ?? "have no data"
+        if info.value == nil || (info.value?.isEmpty)! {
+            valueLabel.text = "have no data"
+            valueLabel.textColor = .gray
+        } else if let value = info.value {
+            valueLabel.text = value
+            valueLabel.textColor = .purple
+        }
     }
 }

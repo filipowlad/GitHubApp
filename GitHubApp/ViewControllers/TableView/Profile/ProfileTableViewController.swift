@@ -8,15 +8,41 @@
 
 import UIKit
 
-class ProfileTableViewController: UITableViewController {
-    
+class ProfileTableViewController: UITableViewController, Refresh {
+
     var userInfo: UserInfo!
+    var token: String!
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.tableView.reloadData()
         self.tableView.tableFooterView = UIView(frame: CGRect.zero)
+        self.tableView.addSubview(self.customRefreshControl)
+        refreshTable(in: self, with: token) { response in
+            guard let response = response else { return }
+            self.userInfo = response
+            self.tableView.reloadData()
+        }
         UIApplication.shared.statusBarStyle = .lightContent
+    }
+    
+    lazy var customRefreshControl: UIRefreshControl = {
+        let refreshControl = UIRefreshControl()
+        refreshControl.addTarget(
+            self,
+            action: #selector(self.handleRefresh(_:)),
+            for: UIControlEvents.valueChanged
+        )
+        refreshControl.tintColor = UIColor.purple
+        return refreshControl
+    }()
+    
+    @objc func handleRefresh(_ refreshControl: UIRefreshControl) {
+        refreshTable(in: self, with: token) { response in
+            guard let response = response else { return }
+            self.userInfo = response
+            self.tableView.reloadData()
+            refreshControl.endRefreshing()
+        }
     }
     
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -25,12 +51,16 @@ class ProfileTableViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         guard let section = ProfileSectionType(rawValue: section) else { return 0 }
-        switch section {
-        case .profileInfo:
-            return 1
-        case .usersCredentials:
-            return userInfo.credentials.count
-        case .usersActions:
+        if let _ = userInfo {
+            switch section {
+            case .profileInfo:
+                return 1
+            case .usersCredentials:
+                return userInfo.credentials.count
+            case .usersActions:
+                return 0
+            }
+        } else {
             return 0
         }
     }

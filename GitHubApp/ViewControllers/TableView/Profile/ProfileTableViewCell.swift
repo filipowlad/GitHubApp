@@ -21,5 +21,7 @@ class ProfileTableViewCell: UITableViewCell {
         userNameLabel.text = userInfo.name
         userLoginLabel.text = userInfo.login
         userBioLabel.text = userInfo.bio ?? "Add your short bio throught 'edit'"
+        self.layoutIfNeeded()
     }
 }
+

@@ -22,12 +22,13 @@ class LoginViewController: UIViewController, SFSafariViewControllerDelegate {
     }
 
     @IBAction func loginButtonTapped(_ sender: UIButton) {
+        self.displaySpinner()
         self.safariAuthenticator = SFAuthenticationSession(url: URL(string: GitHubConnectionManager.link.addingPercentEncoding(withAllowedCharacters: CharacterSet.urlQueryAllowed)!)!, callbackURLScheme: GitHubConnectionManager.redirectURL, completionHandler: { (url, error) in
             if let url = url {
                 GitHubConnectionManager.handle(redirectURL: url) { token in
                     GitHubConnectionManager.getUserInfo(with: token.accessToken) { response in
+                        self.removeSpinner()
                         guard let userTabBarController = self.storyboard?.instantiateViewController(withIdentifier: TabBarViewController.reuseIdentifier) as? TabBarViewController else { return }
-                        userTabBarController.userInfo = response
                         userTabBarController.token = token.accessToken
                         self.navigationController?.pushViewController(userTabBarController, animated: true)
                     }

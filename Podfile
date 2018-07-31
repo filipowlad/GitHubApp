@@ -6,6 +6,6 @@ target 'GitHubApp' do
   use_frameworks!
 
   # Pods for GitHubApp
-	pod 'Alamofire'
-
+	pod 'Alamofire', '~> 4.7'
+	pod 'AlamofireImage', '~> 3.3'
 end

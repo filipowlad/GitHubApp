@@ -35,11 +35,3 @@ extension AvatarTableViewCell: ImageSetter {
         self.avatarImageView.image = image
     }
 }
-
-protocol ImageGetter {
-    func pickImage()
-}
-
-protocol ImageSetter {
-    func setImage(_ image: UIImage)
-}
