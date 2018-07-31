@@ -7,18 +7,35 @@
 //
 
 import UIKit
+import CoreData
+import Alamofire
+import SafariServices
 
-class LoginViewController: UIViewController {
-
+class LoginViewController: UIViewController, SFSafariViewControllerDelegate {
+    
+    private var safariAuthenticator: Any? = nil
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+        self.navigationController?.navigationBar.isHidden = true
+        UIApplication.shared.statusBarStyle = .default
     }
-    
+
     @IBAction func loginButtonTapped(_ sender: UIButton) {
-        
+        self.displaySpinner()
+        self.safariAuthenticator = SFAuthenticationSession(url: URL(string: GitHubConnectionManager.link.addingPercentEncoding(withAllowedCharacters: CharacterSet.urlQueryAllowed)!)!, callbackURLScheme: GitHubConnectionManager.redirectURL, completionHandler: { (url, error) in
+            if let url = url {
+                GitHubConnectionManager.handle(redirectURL: url) { token in
+                    GitHubConnectionManager.getUserInfo(with: token.accessToken) { response in
+                        self.removeSpinner()
+                        guard let userTabBarController = self.storyboard?.instantiateViewController(withIdentifier: TabBarViewController.reuseIdentifier) as? TabBarViewController else { return }
+                        userTabBarController.token = token.accessToken
+                        _ = userTabBarController.preferredStatusBarStyle
+                        self.navigationController?.pushViewController(userTabBarController, animated: true)
+                    }
+                }
+            }
+        })
+        if let svc = self.safariAuthenticator as? SFAuthenticationSession { svc.start() }
     }
-    
-
 }
-
