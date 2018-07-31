@@ -30,6 +30,7 @@ class LoginViewController: UIViewController, SFSafariViewControllerDelegate {
                         self.removeSpinner()
                         guard let userTabBarController = self.storyboard?.instantiateViewController(withIdentifier: TabBarViewController.reuseIdentifier) as? TabBarViewController else { return }
                         userTabBarController.token = token.accessToken
+                        _ = userTabBarController.preferredStatusBarStyle
                         self.navigationController?.pushViewController(userTabBarController, animated: true)
                     }
                 }

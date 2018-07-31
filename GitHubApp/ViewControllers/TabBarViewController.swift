@@ -12,6 +12,10 @@ class TabBarViewController: UITabBarController {
     
     var token: String!
     
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .lightContent
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationController?.navigationBar.isHidden = false

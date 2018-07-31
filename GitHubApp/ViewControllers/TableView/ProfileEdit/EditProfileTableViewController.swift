@@ -19,12 +19,21 @@ class EditProfileTableViewController: UITableViewController, Refresh {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        refreshTable(in: self, with: token) { response in
+        refresh()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        refresh()
+        self.tableView.tableFooterView = UIView(frame: CGRect.zero)
+    }
+    
+    private func refresh() {
+        refreshTableWithBackgroundSpinner(in: self, with: token) { response in
             guard let response = response else { return }
             self.userInfo = response
             self.tableView.reloadData()
         }
-        self.tableView.tableFooterView = UIView(frame: CGRect.zero)
     }
     
     @IBAction func cancelButtonTapped(_ sender: Any) {
@@ -82,6 +91,11 @@ class EditProfileTableViewController: UITableViewController, Refresh {
 
 extension EditProfileTableViewController: ImageGetter {
     func pickImage() {
+        self.displaySpinner()
+        UINavigationBar.appearance().isTranslucent = false
+        UINavigationBar.appearance().tintColor = UIColor.purple
+        UINavigationBar.appearance().titleTextAttributes = [NSAttributedStringKey.foregroundColor: UIColor.purple]
+        
         let picker = UIImagePickerController()
         picker.delegate = self
         picker.allowsEditing = false
@@ -95,10 +109,10 @@ extension EditProfileTableViewController: CredentialsData {
     func getCredentials(_ key: String, _ value: String) {
         credentials[key] = value
         if credentials.count == 4 {
-            self.editableUserData.name = credentials["name"]!
-            self.editableUserData.blog = credentials["blog"]!
-            self.editableUserData.company = credentials["company"]!
-            self.editableUserData.location = credentials["location"]!
+            self.editableUserData.name = credentials["Name:"]!
+            self.editableUserData.blog = credentials["Blog:"]!
+            self.editableUserData.company = credentials["Company:"]!
+            self.editableUserData.location = credentials["Location:"]!
         }
     }
 }
@@ -110,29 +124,17 @@ extension EditProfileTableViewController: BioData {
 }
 
 extension EditProfileTableViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    
     func imagePickerController(_: UIImagePickerController, didFinishPickingMediaWithInfo info: [String: Any]) {
-        UINavigationBar.appearance().isTranslucent = true
-        UINavigationBar.appearance().tintColor = UIColor.white
-        UINavigationBar.appearance().titleTextAttributes = [NSAttributedStringKey.foregroundColor: UIColor.white]
-        dismiss(animated: true, completion: nil)
         guard let image = info[UIImagePickerControllerOriginalImage] as? UIImage else { return }
         imageSetDelegate.setImage(image)
+        self.removeSpinner()
+        dismiss(animated: true, completion: nil)
     }
     
     func imagePickerControllerDidCancel(_: UIImagePickerController) {
-        UINavigationBar.appearance().isTranslucent = true
-        UINavigationBar.appearance().tintColor = UIColor.white
-        UINavigationBar.appearance().titleTextAttributes = [NSAttributedStringKey.foregroundColor: UIColor.white]
+        self.removeSpinner()
         dismiss(animated: true, completion: nil)
     }
-}
-
-struct EditableUserData {
-    var avatarURL = String()
-    var name = String()
-    var bio = String()
-    var blog = String()
-    var company = String()
-    var location = String()
 }
 

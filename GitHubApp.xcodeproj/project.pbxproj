@@ -37,6 +37,8 @@
 		36E4A8E9210F3B0D000B3088 /* ProfileCredentialTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36E4A8E8210F3B0D000B3088 /* ProfileCredentialTableViewCell.swift */; };
 		36E4A8F021103A61000B3088 /* Protocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36E4A8EF21103A61000B3088 /* Protocols.swift */; };
 		36E4A8F221103ABC000B3088 /* RefreshExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36E4A8F121103ABC000B3088 /* RefreshExtension.swift */; };
+		36E4A8F4211056DD000B3088 /* EditableUserData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36E4A8F3211056DD000B3088 /* EditableUserData.swift */; };
+		36E4A8F621105FB0000B3088 /* UsersActivitiesTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36E4A8F521105FB0000B3088 /* UsersActivitiesTableViewCell.swift */; };
 		4C0875856BF36266433BD8F1 /* Pods_GitHubApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22F866101149E08287726B67 /* Pods_GitHubApp.framework */; };
 /* End PBXBuildFile section */
 
@@ -76,6 +78,8 @@
 		36E4A8E8210F3B0D000B3088 /* ProfileCredentialTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileCredentialTableViewCell.swift; sourceTree = "<group>"; };
 		36E4A8EF21103A61000B3088 /* Protocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Protocols.swift; sourceTree = "<group>"; };
 		36E4A8F121103ABC000B3088 /* RefreshExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RefreshExtension.swift; sourceTree = "<group>"; };
+		36E4A8F3211056DD000B3088 /* EditableUserData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditableUserData.swift; sourceTree = "<group>"; };
+		36E4A8F521105FB0000B3088 /* UsersActivitiesTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsersActivitiesTableViewCell.swift; sourceTree = "<group>"; };
 		6DF7D841AA8C20FFFA5B0AF7 /* Pods-GitHubApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GitHubApp.debug.xcconfig"; path = "Pods/Target Support Files/Pods-GitHubApp/Pods-GitHubApp.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -122,7 +126,7 @@
 			children = (
 				36E4A8EE21103A4E000B3088 /* Protocols */,
 				36D7DAA42109FCF600BFD518 /* Enums */,
-				36D7DA982109DE9B00BFD518 /* DecodableStructures */,
+				36D7DA982109DE9B00BFD518 /* Structures */,
 				36D7DA902109A8F900BFD518 /* GitHubApp.entitlements */,
 				366D54002108AA3D002A9055 /* Extensions */,
 				366D53F92108A203002A9055 /* Models */,
@@ -165,10 +169,10 @@
 		366D53F121084677002A9055 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
-				36D7DAA12109FAEB00BFD518 /* TableView */,
 				366D53DE210845A0002A9055 /* LoginViewController.swift */,
 				3616ADAA210B8DC40031DF02 /* StartViewController.swift */,
 				3616ADAC210BA87B0031DF02 /* TabBarViewController.swift */,
+				36D7DAA12109FAEB00BFD518 /* TableView */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -194,13 +198,14 @@
 			path = Extensions;
 			sourceTree = "<group>";
 		};
-		36D7DA982109DE9B00BFD518 /* DecodableStructures */ = {
+		36D7DA982109DE9B00BFD518 /* Structures */ = {
 			isa = PBXGroup;
 			children = (
 				36D7DA992109DEB300BFD518 /* UserInfo.swift */,
 				36D7DA9B2109DED500BFD518 /* OAuth2Token.swift */,
+				36E4A8F3211056DD000B3088 /* EditableUserData.swift */,
 			);
-			path = DecodableStructures;
+			path = Structures;
 			sourceTree = "<group>";
 		};
 		36D7DAA12109FAEB00BFD518 /* TableView */ = {
@@ -229,6 +234,7 @@
 				36D7DA8C21099A8600BFD518 /* ProfileTableViewController.swift */,
 				36D7DAA22109FB0E00BFD518 /* ProfileTableViewCell.swift */,
 				36E4A8E8210F3B0D000B3088 /* ProfileCredentialTableViewCell.swift */,
+				36E4A8F521105FB0000B3088 /* UsersActivitiesTableViewCell.swift */,
 			);
 			path = Profile;
 			sourceTree = "<group>";
@@ -392,10 +398,12 @@
 				36E4A8D3210DD55B000B3088 /* EditProfileSectionType.swift in Sources */,
 				366D53DF210845A0002A9055 /* LoginViewController.swift in Sources */,
 				36D7DA952109B4E600BFD518 /* GitHubApp.xcdatamodeld in Sources */,
+				36E4A8F621105FB0000B3088 /* UsersActivitiesTableViewCell.swift in Sources */,
 				366D53FB2108A217002A9055 /* GitHubConnectionManager.swift in Sources */,
 				36D7DAA62109FD0D00BFD518 /* ProfileSectionType.swift in Sources */,
 				36D7DA8F2109A81300BFD518 /* UIViewControllerExtension.swift in Sources */,
 				36E4A8E7210EFBB2000B3088 /* TypeError.swift in Sources */,
+				36E4A8F4211056DD000B3088 /* EditableUserData.swift in Sources */,
 				36D7DA9A2109DEB300BFD518 /* UserInfo.swift in Sources */,
 				36E4A8D5210DD752000B3088 /* EditProfileTableViewController.swift in Sources */,
 				36D7DA9C2109DED500BFD518 /* OAuth2Token.swift in Sources */,
@@ -562,7 +570,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.filipowladislav.GitHubApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -582,7 +590,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.filipowladislav.GitHubApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};

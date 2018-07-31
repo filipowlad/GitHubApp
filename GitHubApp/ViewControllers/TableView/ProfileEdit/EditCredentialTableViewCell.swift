@@ -19,7 +19,7 @@ class EditCredentialTableViewCell: UITableViewCell {
     var credentialsDelegate: CredentialsData!
 
     func configure(with credential: (key: String, value: String?)) {
-        credentialTypeLabel.text = credential.key
+        credentialTypeLabel.text = credential.key.capitalized + ":"
         credentialTextField.text = credential.value
         currentText = credential.value ?? ""
         credentialTextField.placeholder = ProfileTextFieldsPlaysholders(rawValue: credential.key)?.playsholder

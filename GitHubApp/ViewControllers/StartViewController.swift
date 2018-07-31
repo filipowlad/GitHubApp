@@ -31,6 +31,7 @@ class StartViewController: UIViewController {
             else {
                 guard let userTabBarController = self.storyboard?.instantiateViewController(withIdentifier: TabBarViewController.reuseIdentifier) as? TabBarViewController else { return }
                 userTabBarController.token = token
+                _ = userTabBarController.preferredStatusBarStyle
                 self.navigationController?.pushViewController(userTabBarController, animated: true)
             }
         }

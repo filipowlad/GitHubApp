@@ -15,6 +15,11 @@ class ProfileTableViewCell: UITableViewCell {
     @IBOutlet weak var userLoginLabel: UILabel!
     @IBOutlet weak var userBioLabel: UILabel!
     
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        self.layoutIfNeeded()
+    }
+    
     func configure(with userInfo: UserInfo) {
         userAvatarImageView.setRoundedWith(borderWidth: 2.4, color: UIColor.purple)
         userAvatarImageView.setImageFrom(stringURL: userInfo.avatarURL!)

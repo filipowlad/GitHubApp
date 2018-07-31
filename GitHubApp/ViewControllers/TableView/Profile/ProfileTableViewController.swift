@@ -12,17 +12,28 @@ class ProfileTableViewController: UITableViewController, Refresh {
 
     var userInfo: UserInfo!
     var token: String!
+    
+    var usersActivities = ["Repositories", "Stars", "Followers", "Following"]
 
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        refresh()
+    }
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.tableView.tableFooterView = UIView(frame: CGRect.zero)
         self.tableView.addSubview(self.customRefreshControl)
-        refreshTable(in: self, with: token) { response in
+        refresh()
+        UIApplication.shared.statusBarStyle = .lightContent
+    }
+    
+    private func refresh() {
+        refreshTableWithBackgroundSpinner(in: self, with: token) { response in
             guard let response = response else { return }
             self.userInfo = response
             self.tableView.reloadData()
         }
-        UIApplication.shared.statusBarStyle = .lightContent
     }
     
     lazy var customRefreshControl: UIRefreshControl = {
@@ -37,7 +48,7 @@ class ProfileTableViewController: UITableViewController, Refresh {
     }()
     
     @objc func handleRefresh(_ refreshControl: UIRefreshControl) {
-        refreshTable(in: self, with: token) { response in
+        refreshTableWithoutBackgrounSpinner(with: token) { response in
             guard let response = response else { return }
             self.userInfo = response
             self.tableView.reloadData()
@@ -58,7 +69,7 @@ class ProfileTableViewController: UITableViewController, Refresh {
             case .usersCredentials:
                 return userInfo.credentials.count
             case .usersActions:
-                return 0
+                return usersActivities.count
             }
         } else {
             return 0
@@ -77,7 +88,9 @@ class ProfileTableViewController: UITableViewController, Refresh {
             cell.configure(with: userInfo.credentials[indexPath.row])
             return cell
         case .usersActions:
-            return UITableViewCell()
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: UsersActivitiesTableViewCell.reuseIdentifier, for: indexPath) as? UsersActivitiesTableViewCell else { return UITableViewCell() }
+            cell.configure(with: usersActivities[indexPath.row])
+            return cell
         }
     }
 }

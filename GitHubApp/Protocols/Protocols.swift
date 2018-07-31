@@ -25,5 +25,6 @@ protocol ImageSetter {
 }
 
 protocol Refresh {
-    func refreshTable(in vc: UIViewController, with token: String ,complition: @escaping (UserInfo?)->())
+    func refreshTableWithBackgroundSpinner(in vc: UIViewController, with token: String ,complition: @escaping (UserInfo?)->())
+    func refreshTableWithoutBackgrounSpinner(with token: String ,complition: @escaping (UserInfo?)->())
 }

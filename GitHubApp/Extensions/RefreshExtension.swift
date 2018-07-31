@@ -9,10 +9,16 @@
 import UIKit
 
 extension Refresh {
-    func refreshTable(in vc: UIViewController, with token: String ,complition: @escaping (UserInfo?)->()) {
+    func refreshTableWithBackgroundSpinner(in vc: UIViewController, with token: String ,complition: @escaping (UserInfo?)->()) {
         vc.displaySpinner()
         GitHubConnectionManager.getUserInfo(with: token) { response in
             vc.removeSpinner()
+            complition(response)
+        }
+    }
+    
+    func refreshTableWithoutBackgrounSpinner(with token: String ,complition: @escaping (UserInfo?)->()) {
+        GitHubConnectionManager.getUserInfo(with: token) { response in
             complition(response)
         }
     }

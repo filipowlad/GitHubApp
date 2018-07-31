@@ -41,9 +41,6 @@ class CoreDataModel {
                 completion(nil)
                 return
             }
-            entityObject.forEach {
-                print("\n", $0.value(forKey: "token") as! String, "\n")
-            }
             if !entityObject.isEmpty { result = entityObject[0].value(forKey: "token") as? String }
             completion(result)
         } catch {

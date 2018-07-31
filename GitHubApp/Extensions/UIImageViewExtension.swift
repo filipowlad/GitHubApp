@@ -10,12 +10,12 @@ import UIKit
 
 extension UIImageView {
     func setRoundedWith(borderWidth: CGFloat, color: UIColor) {
-        self.contentMode = UIViewContentMode.scaleAspectFill
-        self.layer.borderWidth = borderWidth
-        self.layer.masksToBounds = false
-        self.layer.borderColor = color.cgColor
-        self.layer.cornerRadius = self.frame.width / borderWidth
-        self.clipsToBounds = true
+        contentMode = UIViewContentMode.scaleAspectFill
+        layer.borderWidth = borderWidth
+        layer.masksToBounds = false
+        layer.borderColor = color.cgColor
+        layer.cornerRadius = frame.size.width / 2
+        clipsToBounds = true
     }
     
     func setImageFrom(stringURL: String) {

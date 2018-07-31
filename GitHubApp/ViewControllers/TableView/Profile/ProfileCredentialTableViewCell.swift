@@ -14,7 +14,7 @@ class ProfileCredentialTableViewCell: UITableViewCell {
     @IBOutlet weak var valueLabel: UILabel!
     
     func configure(with info: (key: String, value: String?)) {
-        keyLabel.text = info.key + ":"
+        keyLabel.text = info.key.capitalized + ":"
         if info.value == nil || (info.value?.isEmpty)! {
             valueLabel.text = "have no data"
             valueLabel.textColor = .gray
